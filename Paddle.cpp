@@ -26,6 +26,7 @@ void Paddle::draw(sf::RenderWindow &window)
 {
     paddle.setPosition(pos);
     window.draw(paddle);
+    this->update();
 }
 
 void Paddle::update()

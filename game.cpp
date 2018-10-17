@@ -42,8 +42,7 @@ void game()
     window.setFramerateLimit(FRAMELIMIT);
     
     sf::Font roboto;
-    if (!roboto.loadFromFile("assets/fonts/Roboto.ttf"))
-        perror("error load font");
+    roboto.loadFromFile("assets/fonts/Roboto.ttf");
 
     sf::Text scoreLeft;
     sf::Text scoreRight;
@@ -56,6 +55,12 @@ void game()
     scoreRight.setPosition(WIDTH - WIDTH / 4, 5);
     scoreRight.setCharacterSize(50);
 
+    sf::Texture bgTexture;
+    bgTexture.loadFromFile("assets/images/background.png");
+    sf::Sprite bgSprite;
+    bgSprite.setScale(sf::Vector2f(WIDTH / bgTexture.getSize().x, HEIGHT / bgTexture.getSize().y));
+    bgSprite.setTexture(bgTexture);
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -63,11 +68,10 @@ void game()
             if (event.type == sf::Event::Closed) window.close();
 
         window.clear();
+        window.draw(bgSprite);
         collision(ball, leftPaddle, rightPaddle, scoreManager);
         leftPaddle.draw(window);
-        leftPaddle.update();
         rightPaddle.draw(window);
-        rightPaddle.update();
         ball.draw(window);
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) ball.stopped = false;
         if(!ball.stopped) ball.update();
