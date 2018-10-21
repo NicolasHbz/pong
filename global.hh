@@ -10,4 +10,7 @@ const int FRAMELIMIT = 400;
 const float PADDLE_WIDTH = 10;
 const float PADDLE_HEIGHT = HEIGHT * 0.15f;
 
-#endif 
+// game
+const int MAX_SCORE = 3;
+
+#endif

@@ -19,13 +19,13 @@ void collision(Ball &ball, Paddle &leftPaddle, Paddle &rightPaddle, ScoreManager
             ball.direction.x *= -1.1;
     }
     if (ball.pos.x < 0) {
-        scoreManager.setRightScore(scoreManager.getRightScore() + 1);
+        scoreManager.update("Right");
         ball.direction.x = -1;
         ball.resetPosition();
     }
     if (ball.pos.x > WIDTH) {
         ball.direction.x = 1;
-        scoreManager.setLeftScore(scoreManager.getLeftScore() + 1);
+        scoreManager.update("Left");
         ball.resetPosition();
     }
 }
@@ -35,25 +35,10 @@ void game()
     Paddle leftPaddle("left");
     Paddle rightPaddle("right");
     Ball ball;
-
     ScoreManager &scoreManager = ScoreManager::GetInstance();
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Pong !!!");
     window.setFramerateLimit(FRAMELIMIT);
-    
-    sf::Font roboto;
-    roboto.loadFromFile("assets/fonts/Roboto.ttf");
-
-    sf::Text scoreLeft;
-    sf::Text scoreRight;
-    scoreLeft.setFont(roboto);
-    scoreLeft.setFillColor(sf::Color::White);
-    scoreLeft.setPosition(0 + WIDTH / 4, 5);
-    scoreLeft.setCharacterSize(50);
-    scoreRight.setFont(roboto);
-    scoreRight.setFillColor(sf::Color::White);
-    scoreRight.setPosition(WIDTH - WIDTH / 4, 5);
-    scoreRight.setCharacterSize(50);
 
     sf::Texture bgTexture;
     bgTexture.loadFromFile("assets/images/background.png");
@@ -75,10 +60,7 @@ void game()
         ball.draw(window);
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) ball.stopped = false;
         if(!ball.stopped) ball.update();
-        scoreLeft.setString(std::to_string(scoreManager.getLeftScore()));
-        window.draw(scoreLeft);
-        scoreRight.setString(std::to_string(scoreManager.getRightScore()));
-        window.draw(scoreRight);
+        scoreManager.draw(window);
         window.display();
     }
 }

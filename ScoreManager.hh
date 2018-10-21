@@ -2,6 +2,7 @@
 #define _SCORE_MANAGER_HH
 
 #include <SFML/Graphics.hpp>
+#include "AbstractEntity.hh"
 
 class ScoreManager
 {
@@ -9,8 +10,6 @@ class ScoreManager
         ScoreManager();
         ScoreManager(const ScoreManager&) = delete;
         ScoreManager& operator=(const ScoreManager&) = delete;
-        int leftScore;
-        int rightScore;
 
     public:
         static ScoreManager &GetInstance();
@@ -18,6 +17,14 @@ class ScoreManager
         void setRightScore(int score);
         int getLeftScore() const;
         int getRightScore() const;
+        void resetScore();
+        void draw(sf::RenderWindow &window);
+        void update(std::string scoreToUpdate);
+        sf::Font roboto;
+        sf::Text scoreLeftText;
+        sf::Text scoreRightText;
+        int leftScore;
+        int rightScore;
 };
 
 #endif

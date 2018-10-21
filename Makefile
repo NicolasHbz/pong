@@ -6,7 +6,8 @@ SOURCES		=	main.cpp			\
 				Paddle.cpp			\
 				Ball.cpp			\
 				game.cpp			\
-				ScoreManager.cpp
+				ScoreManager.cpp	\
+				GameOver.cpp
 OBJECTS		=	$(SOURCES:.cpp=.o)
 EXECUTABLE	=	pong
 
