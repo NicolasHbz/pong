@@ -5,8 +5,13 @@
 #include "Paddle.hh"
 #include "Ball.hh"
 #include "ScoreManager.hh"
+#include "Game.hh"
 
-void collision(Ball &ball, Paddle &leftPaddle, Paddle &rightPaddle, ScoreManager &scoreManager)
+Game::Game(){}
+
+Game::~Game(){}
+
+void Game::collision(Ball &ball, Paddle &leftPaddle, Paddle &rightPaddle, ScoreManager &scoreManager)
 {
     if ((ball.pos.y < leftPaddle.pos.y + PADDLE_HEIGHT / 2)
         && (ball.pos.y > leftPaddle.pos.y - PADDLE_HEIGHT / 2)
@@ -30,15 +35,12 @@ void collision(Ball &ball, Paddle &leftPaddle, Paddle &rightPaddle, ScoreManager
     }
 }
 
-void game()
+int Game::run(sf::RenderWindow &window)
 {
     Paddle leftPaddle("left");
     Paddle rightPaddle("right");
     Ball ball;
     ScoreManager &scoreManager = ScoreManager::GetInstance();
-
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Pong !!!");
-    window.setFramerateLimit(FRAMELIMIT);
 
     sf::Texture bgTexture;
     bgTexture.loadFromFile("assets/images/background.png");
@@ -50,7 +52,21 @@ void game()
     {
         sf::Event event;
         while (window.pollEvent(event))
-            if (event.type == sf::Event::Closed) window.close();
+		{
+			if (event.type == sf::Event::Closed)
+				return -1;
+			if (event.type == sf::Event::KeyPressed)
+			{
+				switch (event.key.code)
+				{
+                    case sf::Keyboard::Escape:
+                        return 0;
+                        break;
+                    default:
+                        break;
+				}
+			}
+		}
 
         window.clear();
         window.draw(bgSprite);
@@ -63,4 +79,5 @@ void game()
         scoreManager.draw(window);
         window.display();
     }
+    return -1;
 }

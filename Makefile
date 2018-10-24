@@ -3,11 +3,13 @@ CFLAGS		=	-c -std=c++11 -Wno-unused-command-line-argument
 LIBFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system
 SOURCES		=	main.cpp			\
 				AbstractEntity.cpp	\
+				AbstractScreen.cpp	\
 				Paddle.cpp			\
 				Ball.cpp			\
-				game.cpp			\
+				Game.cpp			\
 				ScoreManager.cpp	\
-				GameOver.cpp
+				GameOver.cpp		\
+				Menu.cpp
 OBJECTS		=	$(SOURCES:.cpp=.o)
 EXECUTABLE	=	pong
 
