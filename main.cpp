@@ -3,6 +3,7 @@
 #include "Game.hh"
 #include "AbstractScreen.hh"
 #include "Menu.hh"
+#include "GameOver.hh"
 
 int main()
 {
@@ -13,15 +14,18 @@ int main()
 
     Menu menu;
 	Game game;
-    std::vector<AbstractScreen*> Screens;
-    Screens.push_back(&menu);
-	Screens.push_back(&game);
+    GameOver gameOverLeft("left");
+    GameOver gameOverRight("right");
+    std::vector<AbstractScreen*> Screens(ScreensItems::count);
+    
+    Screens[mainMenuScreen] = &menu;
+    Screens[gameScreen] = &game;
+    Screens[leftGameOverScreen] = &gameOverLeft;
+    Screens[rightGameOverScreen] = &gameOverRight;
 
     int screen = 0;
-	while (screen >= 0)
-	{
+	while (screen != exitGame)
 		screen = Screens[screen]->run(window);
-	}
 
 	return EXIT_SUCCESS;
 }

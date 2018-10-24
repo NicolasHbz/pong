@@ -48,19 +48,15 @@ int Game::run(sf::RenderWindow &window)
     bgSprite.setScale(sf::Vector2f(WIDTH / bgTexture.getSize().x, HEIGHT / bgTexture.getSize().y));
     bgSprite.setTexture(bgTexture);
 
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event))
-		{
+        while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
-				return -1;
-			if (event.type == sf::Event::KeyPressed)
-			{
-				switch (event.key.code)
-				{
+				return exitGame;
+			if (event.type == sf::Event::KeyPressed) {
+				switch (event.key.code) {
                     case sf::Keyboard::Escape:
-                        return 0;
+                        return mainMenuScreen;
                         break;
                     default:
                         break;
@@ -74,10 +70,23 @@ int Game::run(sf::RenderWindow &window)
         leftPaddle.draw(window);
         rightPaddle.draw(window);
         ball.draw(window);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) ball.stopped = false;
-        if(!ball.stopped) ball.update();
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            ball.stopped = false;
+        if (!ball.stopped)
+            ball.update();
+
         scoreManager.draw(window);
+        if (scoreManager.getLeftScore() == MAX_SCORE) {
+            scoreManager.resetScore();
+            return leftGameOverScreen;
+        }
+        else if (scoreManager.getRightScore() == MAX_SCORE) {
+            scoreManager.resetScore();
+            return rightGameOverScreen;
+        }
+
         window.display();
     }
-    return -1;
+    return 0;
 }

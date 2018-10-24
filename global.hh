@@ -12,5 +12,13 @@ const float PADDLE_HEIGHT = HEIGHT * 0.15f;
 
 // game
 const int MAX_SCORE = 3;
+enum ScreensItems{
+    exitGame = -1,
+    mainMenuScreen = 0,
+    gameScreen = 1,
+    leftGameOverScreen = 2,
+    rightGameOverScreen = 3,
+    count = 4
+};
 
 #endif

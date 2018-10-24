@@ -58,14 +58,14 @@ int Menu::run(sf::RenderWindow &window)
 					case sf::Keyboard::Return:
 						if (selectedMenuItem == play) {
 							playing = true;
-							return 1;
+							return gameScreen;
 						}
 						else {
-							return -1;
+							return exitGame;
 						}
 						break;
 					case sf::Keyboard::Escape:
-						return -1;
+						return exitGame;
 						break;
 					default:
 						break;
@@ -95,5 +95,5 @@ int Menu::run(sf::RenderWindow &window)
 		window.draw(exitText);
 		window.display();
 	}
-	return -1;
+	return exitGame;
 }

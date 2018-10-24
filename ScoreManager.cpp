@@ -25,16 +25,6 @@ void ScoreManager::draw(sf::RenderWindow &window)
     scoreRightText.setString(std::to_string(rightScore));
     window.draw(scoreLeftText);
     window.draw(scoreRightText);
-    if (leftScore == MAX_SCORE) {
-        window.clear();
-        GameOver gameOver("left");
-        gameOver.draw(window);
-    }
-    if (rightScore == MAX_SCORE) {
-        window.clear();
-        GameOver gameOver("right");
-        gameOver.draw(window);
-    }
 }
 
 void ScoreManager::update(std::string scoreToUpdate)
