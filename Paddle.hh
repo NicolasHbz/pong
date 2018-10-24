@@ -2,6 +2,7 @@
 #define _PADDLE_HH
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "AbstractEntity.hh"
 
 class Paddle: public AbstractEntity
@@ -11,8 +12,12 @@ class Paddle: public AbstractEntity
         ~Paddle();
         virtual void draw(sf::RenderWindow &window) override;
         virtual void update() override;
+        void playSound();
         sf::RectangleShape paddle;
         std::string initialPosition;
+        sf::SoundBuffer buffer;
+        sf::Sound sound;
+
 };
 
 #endif 

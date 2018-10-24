@@ -2,9 +2,12 @@
 #include "Paddle.hh"
 #include "global.hh"
 #include <iostream>
+#include <SFML/Audio.hpp>
 
 Paddle::Paddle(std::string initialPosition)
 {
+    buffer.loadFromFile("assets/sounds/paddle.wav");
+    sound.setBuffer(buffer);
     this->initialPosition = initialPosition;
     paddle.setSize(sf::Vector2f(PADDLE_WIDTH, PADDLE_HEIGHT));
     paddle.setFillColor(sf::Color::White);
@@ -49,3 +52,9 @@ void Paddle::update()
     if ((pos.y + PADDLE_HEIGHT / 2) >= HEIGHT) pos.y--;
     if ((pos.y - PADDLE_HEIGHT / 2) <= 0) pos.y++;
 }
+
+void Paddle::playSound() 
+{
+    sound.play();
+}
+

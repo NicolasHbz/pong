@@ -6,9 +6,9 @@
 GameOver::GameOver(std::string param)
 {
     if (param == "left")
-        title.setString("Left player won the game !!!");
+        winner = "left";
     if (param == "right")
-        title.setString("Right player won the game !!!");
+        winner = "right" ;
 }
 
 GameOver::~GameOver()
@@ -22,6 +22,7 @@ int GameOver::run(sf::RenderWindow &window)
 	sf::Font font;
 	sf::Text playText;
 	sf::Text exitText;
+    sf::Text title;
 	int selectedMenuItem = 0;
 
     texture.loadFromFile("assets/images/background.png");
@@ -34,6 +35,10 @@ int GameOver::run(sf::RenderWindow &window)
     title.setFillColor(sf::Color::White);
     title.setCharacterSize(70);
     title.setPosition({ WIDTH / 5, 100 });
+    if (winner == "left")
+        title.setString("Left player won the game !!!");
+    else if (winner == "right")
+        title.setString("Right player won the game !!!");
 
 	playText.setFont(font);
 	playText.setCharacterSize(50);
@@ -45,7 +50,7 @@ int GameOver::run(sf::RenderWindow &window)
 	exitText.setString("Exit");
 	exitText.setPosition({ WIDTH / 2.1f, 450 });
 
-	while (true)
+	while (window.isOpen())
 	{
 		sf::Event event;
 		while (window.pollEvent(event))

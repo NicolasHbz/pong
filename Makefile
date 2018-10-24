@@ -1,6 +1,6 @@
 CC			=	g++
 CFLAGS		=	-c -std=c++11 -Wno-unused-command-line-argument
-LIBFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system
+LIBFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 SOURCES		=	main.cpp			\
 				AbstractEntity.cpp	\
 				AbstractScreen.cpp	\

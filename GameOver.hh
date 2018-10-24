@@ -7,13 +7,12 @@
 class GameOver: public AbstractScreen
 {
     public:
-        bool playing;
 	    enum actions{ play = 0, exit = 1 };
+        std::string winner;
 
         GameOver(std::string param);
         ~GameOver();
         void draw(sf::RenderWindow &window);
-        sf::Text title;
         virtual int run(sf::RenderWindow &window);
 };
 

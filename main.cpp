@@ -16,8 +16,8 @@ int main()
 	Game game;
     GameOver gameOverLeft("left");
     GameOver gameOverRight("right");
+
     std::vector<AbstractScreen*> Screens(ScreensItems::count);
-    
     Screens[mainMenuScreen] = &menu;
     Screens[gameScreen] = &game;
     Screens[leftGameOverScreen] = &gameOverLeft;

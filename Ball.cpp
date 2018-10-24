@@ -4,6 +4,10 @@
 
 Ball::Ball()
 {
+    buffer.loadFromFile("assets/sounds/ball.wav");
+    sound.setBuffer(buffer);
+    bufferFalledBall.loadFromFile("assets/sounds/ball_falled.wav");
+    soundFalledBall.setBuffer(bufferFalledBall);
     ball.setRadius(5);
     ball.setFillColor(sf::Color::White);
     pos.x = WIDTH / 2;
@@ -27,7 +31,10 @@ void Ball::update()
 {
     pos.x += direction.x;
     pos.y += direction.y;
-    if (pos.y <= 0 || pos.y >= HEIGHT) direction.y *= -1;
+    if (pos.y <= 0 || pos.y >= HEIGHT) {
+        sound.play();
+        direction.y *= -1;
+    }
 }
 
 void Ball::resetPosition()
@@ -35,4 +42,5 @@ void Ball::resetPosition()
     pos.x = WIDTH / 2;
     pos.y = HEIGHT / 2;
     stopped = true;
+    soundFalledBall.play();
 }

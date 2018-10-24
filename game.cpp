@@ -16,11 +16,13 @@ void Game::collision(Ball &ball, Paddle &leftPaddle, Paddle &rightPaddle, ScoreM
     if ((ball.pos.y < leftPaddle.pos.y + PADDLE_HEIGHT / 2)
         && (ball.pos.y > leftPaddle.pos.y - PADDLE_HEIGHT / 2)
         && (ball.pos.x < 10)) {
+            leftPaddle.playSound();
             ball.direction.x *= -1.1;
     }
     if ((ball.pos.y < rightPaddle.pos.y + PADDLE_HEIGHT / 2)
         && (ball.pos.y > rightPaddle.pos.y - PADDLE_HEIGHT / 2)
         && (ball.pos.x > WIDTH - 15)) {
+            rightPaddle.playSound();
             ball.direction.x *= -1.1;
     }
     if (ball.pos.x < 0) {
