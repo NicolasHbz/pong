@@ -11,7 +11,7 @@ class Game: public AbstractScreen
     public:
         Game();
         ~Game();
-        virtual int run(sf::RenderWindow &App);
+        virtual int run(sf::RenderWindow &window);
         void collision(Ball &ball, Paddle &leftPaddle, Paddle &rightPaddle, ScoreManager &scoreManager);  
 };
 

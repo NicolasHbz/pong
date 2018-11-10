@@ -42,7 +42,16 @@ int Game::run(sf::RenderWindow &window)
     Paddle leftPaddle("left");
     Paddle rightPaddle("right");
     Ball ball;
+    sf::Clock clock;
+    sf::Font roboto;
+    sf::Text fpsCounter;
     ScoreManager &scoreManager = ScoreManager::GetInstance();
+
+    roboto.loadFromFile("assets/fonts/Roboto.ttf");
+    fpsCounter.setFont(roboto);
+    fpsCounter.setFillColor(sf::Color::Red);
+    fpsCounter.setCharacterSize(25);
+    fpsCounter.setPosition({ 15, 15 });
 
     sf::Texture bgTexture;
     bgTexture.loadFromFile("assets/images/background.png");
@@ -72,6 +81,11 @@ int Game::run(sf::RenderWindow &window)
         leftPaddle.draw(window);
         rightPaddle.draw(window);
         ball.draw(window);
+
+        sf::Time time = clock.getElapsedTime();
+        window.draw(fpsCounter);
+        fpsCounter.setString(std::to_string(int(1 / time.asSeconds())));
+        clock.restart().asSeconds();
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             ball.stopped = false;
