@@ -2,17 +2,17 @@
 #include "global.hh"
 #include "ScoreManager.hh"
 #include "GameOver.hh"
+#include "Factory.hh"
 
 ScoreManager::ScoreManager()
 {
     leftScore = 0;
     rightScore = 0;
-    roboto.loadFromFile("assets/fonts/Roboto.ttf");
-    scoreLeftText.setFont(roboto);
+    scoreLeftText.setFont(Factory::getFont());
     scoreLeftText.setFillColor(sf::Color::White);
     scoreLeftText.setCharacterSize(50);
     scoreLeftText.setPosition(0 + WIDTH / 4, 5);
-    scoreRightText.setFont(roboto);
+    scoreRightText.setFont(Factory::getFont());
     scoreRightText.setFillColor(sf::Color::White);
     scoreRightText.setPosition(WIDTH - WIDTH / 4, 5);
     scoreRightText.setCharacterSize(50);

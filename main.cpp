@@ -4,7 +4,7 @@
 #include "AbstractScreen.hh"
 #include "Menu.hh"
 #include "GameOver.hh"
-#include "ScreenFactory.hh"
+#include "Factory.hh"
 
 int main()
 {
@@ -13,11 +13,10 @@ int main()
 
 	window.setMouseCursorVisible(false);
 
-    ScreenFactory screenFactory;
-    AbstractScreen *menu = screenFactory.create("menu");
-	AbstractScreen *game = screenFactory.create("game");
-    AbstractScreen *gameOverLeft = screenFactory.create("game-over-left");
-    AbstractScreen *gameOverRight = screenFactory.create("game-over-right");
+    AbstractScreen *menu = Factory::createScreen("menu");
+	AbstractScreen *game = Factory::createScreen("game");
+    AbstractScreen *gameOverLeft = Factory::createScreen("game-over-left");
+    AbstractScreen *gameOverRight = Factory::createScreen("game-over-right");
 
     std::vector<AbstractScreen*> Screens(ScreensItems::count);
     Screens[mainMenuScreen] = menu;

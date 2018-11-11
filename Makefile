@@ -10,7 +10,7 @@ SOURCES		=	main.cpp			\
 				ScoreManager.cpp	\
 				GameOver.cpp		\
 				Menu.cpp			\
-				ScreenFactory.cpp
+				Factory.cpp
 OBJECTS		=	$(SOURCES:.cpp=.o)
 EXECUTABLE	=	pong
 

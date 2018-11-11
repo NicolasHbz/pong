@@ -6,6 +6,7 @@
 #include "Ball.hh"
 #include "ScoreManager.hh"
 #include "Game.hh"
+#include "Factory.hh"
 
 Game::Game(){}
 
@@ -43,21 +44,22 @@ int Game::run(sf::RenderWindow &window)
     Paddle rightPaddle("right");
     Ball ball;
     sf::Clock clock;
-    sf::Font roboto;
+    sf::Time time;
     sf::Text fpsCounter;
     ScoreManager &scoreManager = ScoreManager::GetInstance();
+    Factory factory;
 
-    roboto.loadFromFile("assets/fonts/Roboto.ttf");
-    fpsCounter.setFont(roboto);
+    fpsCounter.setFont(Factory::getFont());
     fpsCounter.setFillColor(sf::Color::Red);
     fpsCounter.setCharacterSize(25);
     fpsCounter.setPosition({ 15, 15 });
 
-    sf::Texture bgTexture;
-    bgTexture.loadFromFile("assets/images/background.png");
+    sf::Texture bgTexture = Factory::getTexture();
     sf::Sprite bgSprite;
     bgSprite.setScale(sf::Vector2f(WIDTH / bgTexture.getSize().x, HEIGHT / bgTexture.getSize().y));
     bgSprite.setTexture(bgTexture);
+
+    factory.getMusic(factory.LEATHER_TEETH);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -82,8 +84,8 @@ int Game::run(sf::RenderWindow &window)
         rightPaddle.draw(window);
         ball.draw(window);
 
-        sf::Time time = clock.getElapsedTime();
         window.draw(fpsCounter);
+        time = clock.getElapsedTime();
         fpsCounter.setString(std::to_string(int(1 / time.asSeconds())));
         clock.restart().asSeconds();
 

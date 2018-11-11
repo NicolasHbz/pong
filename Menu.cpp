@@ -1,8 +1,10 @@
 #include "Menu.hh"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "global.hh"
+#include "Factory.hh"
 
-Menu::Menu(void)
+Menu::Menu()
 {
 	playing = false;
 }
@@ -12,33 +14,33 @@ Menu::~Menu(){}
 int Menu::run(sf::RenderWindow &window)
 {
 	bool running = true;
-	sf::Texture texture;
 	sf::Sprite sprite;
-	sf::Font font;
 	sf::Text playText;
 	sf::Text exitText;
 	sf::Text continueText;
 	int selectedMenuItem = 0;
+    Factory factory;
 
-    texture.loadFromFile("assets/images/background.png");
+    sf::Texture texture = Factory::getTexture();
     sprite.setScale(sf::Vector2f(WIDTH / texture.getSize().x, HEIGHT / texture.getSize().y));
 	sprite.setTexture(texture);
 
-	font.loadFromFile("assets/fonts/Roboto.ttf");
-	playText.setFont(font);
+	playText.setFont(Factory::getFont());
 	playText.setCharacterSize(70);
 	playText.setString("Play");
 	playText.setPosition({ WIDTH / 7, 250 });
 
-	exitText.setFont(font);
+	exitText.setFont(Factory::getFont());
 	exitText.setCharacterSize(70);
 	exitText.setString("Exit");
 	exitText.setPosition({ WIDTH / 7, 450 });
 
-	continueText.setFont(font);
+	continueText.setFont(Factory::getFont());
 	continueText.setCharacterSize(70);
 	continueText.setString("Continue");
 	continueText.setPosition({ WIDTH / 7, 250 });
+
+    factory.getMusic(factory.END_TITLES);
 
 	while (running)
 	{

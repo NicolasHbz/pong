@@ -20,7 +20,6 @@ class ScoreManager
         void resetScore();
         void draw(sf::RenderWindow &window);
         void update(std::string scoreToUpdate);
-        sf::Font roboto;
         sf::Text scoreLeftText;
         sf::Text scoreRightText;
         int leftScore;
