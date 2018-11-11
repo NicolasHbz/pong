@@ -8,6 +8,8 @@ class AbstractScreen
     public:
         virtual ~AbstractScreen();
         virtual int run (sf::RenderWindow &window) = 0;
+        virtual void addObserver(AbstractScreen*);
+        virtual void notify(std::string);
 
     protected:
         AbstractScreen();

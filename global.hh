@@ -16,9 +16,7 @@ enum ScreensItems{
     exitGame = -1,
     mainMenuScreen = 0,
     gameScreen = 1,
-    leftGameOverScreen = 2,
-    rightGameOverScreen = 3,
-    count = 4
+    count = 2
 };
 
 #endif

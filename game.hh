@@ -11,8 +11,12 @@ class Game: public AbstractScreen
     public:
         Game();
         ~Game();
-        virtual int run(sf::RenderWindow &window);
-        void collision(Ball &ball, Paddle &leftPaddle, Paddle &rightPaddle, ScoreManager &scoreManager);  
+        virtual int run(sf::RenderWindow &window) override;
+        void collision(Ball &ball, Paddle &leftPaddle, Paddle &rightPaddle, ScoreManager &scoreManager);
+        virtual void addObserver(AbstractScreen*) override;
+
+    private:
+        AbstractScreen* observer;
 };
 
 #endif

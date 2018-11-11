@@ -11,9 +11,18 @@ Menu::Menu()
 
 Menu::~Menu(){}
 
+void Menu::notify(std::string winner)
+{
+    title.setString("");
+
+    if (winner == "left")
+        title.setString("Left player won the game !!!");
+    else if (winner == "right")
+        title.setString("Right player won the game !!!");
+}
+
 int Menu::run(sf::RenderWindow &window)
 {
-	bool running = true;
 	sf::Sprite sprite;
 	sf::Text playText;
 	sf::Text exitText;
@@ -25,24 +34,29 @@ int Menu::run(sf::RenderWindow &window)
     sprite.setScale(sf::Vector2f(WIDTH / texture.getSize().x, HEIGHT / texture.getSize().y));
 	sprite.setTexture(texture);
 
+    title.setFont(Factory::getFont());
+    title.setFillColor(sf::Color::Green);
+    title.setCharacterSize(70);
+    title.setPosition({ WIDTH / 5, 100 });
+
 	playText.setFont(Factory::getFont());
 	playText.setCharacterSize(70);
 	playText.setString("Play");
-	playText.setPosition({ WIDTH / 7, 250 });
+	playText.setPosition({ WIDTH / 7, 350 });
+
+    continueText.setFont(Factory::getFont());
+	continueText.setCharacterSize(70);
+	continueText.setString("Continue");
+	continueText.setPosition({ WIDTH / 7, 350 });
 
 	exitText.setFont(Factory::getFont());
 	exitText.setCharacterSize(70);
 	exitText.setString("Exit");
 	exitText.setPosition({ WIDTH / 7, 450 });
 
-	continueText.setFont(Factory::getFont());
-	continueText.setCharacterSize(70);
-	continueText.setString("Continue");
-	continueText.setPosition({ WIDTH / 7, 250 });
-
     factory.getMusic(factory.END_TITLES);
 
-	while (running)
+	while (true)
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -94,6 +108,7 @@ int Menu::run(sf::RenderWindow &window)
 		else
 			window.draw(playText);
 
+        window.draw(title);
 		window.draw(exitText);
 		window.display();
 	}

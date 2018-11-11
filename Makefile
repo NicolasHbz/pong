@@ -8,7 +8,6 @@ SOURCES		=	main.cpp			\
 				Ball.cpp			\
 				Game.cpp			\
 				ScoreManager.cpp	\
-				GameOver.cpp		\
 				Menu.cpp			\
 				Factory.cpp
 OBJECTS		=	$(SOURCES:.cpp=.o)

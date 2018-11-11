@@ -12,6 +12,11 @@ Game::Game(){}
 
 Game::~Game(){}
 
+void Game::addObserver(AbstractScreen* observer)
+{
+    this->observer = observer;
+}
+
 void Game::collision(Ball &ball, Paddle &leftPaddle, Paddle &rightPaddle, ScoreManager &scoreManager)
 {
     if ((ball.pos.y < leftPaddle.pos.y + PADDLE_HEIGHT / 2)
@@ -97,11 +102,13 @@ int Game::run(sf::RenderWindow &window)
         scoreManager.draw(window);
         if (scoreManager.getLeftScore() == MAX_SCORE) {
             scoreManager.resetScore();
-            return leftGameOverScreen;
+            observer->notify("left");
+            return mainMenuScreen;
         }
         else if (scoreManager.getRightScore() == MAX_SCORE) {
             scoreManager.resetScore();
-            return rightGameOverScreen;
+            observer->notify("right");
+            return mainMenuScreen;
         }
 
         window.display();

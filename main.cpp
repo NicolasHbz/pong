@@ -3,7 +3,6 @@
 #include "Game.hh"
 #include "AbstractScreen.hh"
 #include "Menu.hh"
-#include "GameOver.hh"
 #include "Factory.hh"
 
 int main()
@@ -15,14 +14,12 @@ int main()
 
     AbstractScreen *menu = Factory::createScreen("menu");
 	AbstractScreen *game = Factory::createScreen("game");
-    AbstractScreen *gameOverLeft = Factory::createScreen("game-over-left");
-    AbstractScreen *gameOverRight = Factory::createScreen("game-over-right");
 
+    game->addObserver(menu);
+    
     std::vector<AbstractScreen*> Screens(ScreensItems::count);
     Screens[mainMenuScreen] = menu;
     Screens[gameScreen] = game;
-    Screens[leftGameOverScreen] = gameOverLeft;
-    Screens[rightGameOverScreen] = gameOverRight;
 
     int currentScreen = 0;
 	while (currentScreen != exitGame)

@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "global.hh"
 #include "ScoreManager.hh"
-#include "GameOver.hh"
 #include "Factory.hh"
 
 ScoreManager::ScoreManager()

@@ -1,7 +1,6 @@
 #include "AbstractScreen.hh"
 #include "Game.hh"
 #include "Menu.hh"
-#include "GameOver.hh"
 #include "Factory.hh"
 
 using namespace std;
@@ -27,10 +26,6 @@ AbstractScreen* Factory::createScreen(const string& name)
         return new Menu();
     } else if (!name.compare(Factory::GAME)) {
         return new Game();
-    } else if (!name.compare(Factory::GAME_OVER_LEFT)) {
-        return new GameOver("left");
-    } else if (!name.compare(Factory::GAME_OVER_RIGHT)) {
-        return new GameOver("right");
     }
     return NULL;
 }
