@@ -9,7 +9,9 @@ Menu::Menu()
 	playing = false;
 }
 
-Menu::~Menu(){}
+Menu::~Menu()
+{
+}
 
 void Menu::notify(std::string winner)
 {
@@ -26,7 +28,6 @@ int Menu::run(sf::RenderWindow &window)
 	sf::Sprite sprite;
 	sf::Text playText;
 	sf::Text exitText;
-	sf::Text continueText;
 	int selectedMenuItem = 0;
     Factory factory;
 
@@ -43,11 +44,6 @@ int Menu::run(sf::RenderWindow &window)
 	playText.setCharacterSize(70);
 	playText.setString("Play");
 	playText.setPosition({ WIDTH / 7, 350 });
-
-    continueText.setFont(Factory::getFont());
-	continueText.setCharacterSize(70);
-	continueText.setString("Continue");
-	continueText.setPosition({ WIDTH / 7, 350 });
 
 	exitText.setFont(Factory::getFont());
 	exitText.setCharacterSize(70);
@@ -89,25 +85,19 @@ int Menu::run(sf::RenderWindow &window)
 			}
 		}
 
+        window.clear();
+
 		if (selectedMenuItem == play) {
 			playText.setFillColor(sf::Color::Red);
 			exitText.setFillColor(sf::Color::White);
-			continueText.setFillColor(sf::Color::Red);
 		}
 		else if (selectedMenuItem == exit) {
 			playText.setFillColor(sf::Color::White);
 			exitText.setFillColor(sf::Color::Red);
-			continueText.setFillColor(sf::Color::White);
 		}
 
-		window.clear();
 		window.draw(sprite);
-
-		if (playing)
-			window.draw(continueText);
-		else
-			window.draw(playText);
-
+		window.draw(playText);
         window.draw(title);
 		window.draw(exitText);
 		window.display();

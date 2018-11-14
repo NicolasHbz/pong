@@ -30,7 +30,7 @@ void ScoreManager::update(std::string scoreToUpdate)
 {
     if(scoreToUpdate == "Left")
         this->setLeftScore(this->getLeftScore() + 1);
-    if (scoreToUpdate == "Right")
+    else if (scoreToUpdate == "Right")
         this->setRightScore(this->getRightScore() + 1);
 }
 

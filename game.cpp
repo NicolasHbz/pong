@@ -50,14 +50,21 @@ int Game::run(sf::RenderWindow &window)
     Ball ball;
     sf::Clock clock;
     sf::Time time;
-    sf::Text fpsCounter;
+    sf::Text fpsCounter, pause;
     ScoreManager &scoreManager = ScoreManager::GetInstance();
     Factory factory;
+    bool paused = false;
 
     fpsCounter.setFont(Factory::getFont());
     fpsCounter.setFillColor(sf::Color::Red);
     fpsCounter.setCharacterSize(25);
     fpsCounter.setPosition({ 15, 15 });
+
+    pause.setFont(Factory::getFont());
+    pause.setFillColor(sf::Color::Red);
+    pause.setCharacterSize(75);
+    pause.setPosition({ WIDTH / 2.4f, HEIGHT / 2 });
+    pause.setString("PAUSE");
 
     sf::Texture bgTexture = Factory::getTexture();
     sf::Sprite bgSprite;
@@ -74,7 +81,7 @@ int Game::run(sf::RenderWindow &window)
 			if (event.type == sf::Event::KeyPressed) {
 				switch (event.key.code) {
                     case sf::Keyboard::Escape:
-                        return mainMenuScreen;
+                        paused = !paused;
                         break;
                     default:
                         break;
@@ -82,30 +89,34 @@ int Game::run(sf::RenderWindow &window)
 			}
 		}
 
-        window.clear();
-        window.draw(bgSprite);
-        collision(ball, leftPaddle, rightPaddle, scoreManager);
-        leftPaddle.draw(window);
-        rightPaddle.draw(window);
-        ball.draw(window);
+        if (!paused) {
+            window.clear();
+            window.draw(bgSprite);
+            leftPaddle.draw(window);
+            rightPaddle.draw(window);
+            ball.draw(window);
+            window.draw(fpsCounter);
+            scoreManager.draw(window);
+            if (!ball.stopped)
+                ball.update();
+        } else {
+            window.draw(pause);
+        }
 
-        window.draw(fpsCounter);
+        collision(ball, leftPaddle, rightPaddle, scoreManager);
+
         time = clock.getElapsedTime();
         fpsCounter.setString(std::to_string(int(1 / time.asSeconds())));
         clock.restart().asSeconds();
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             ball.stopped = false;
-        if (!ball.stopped)
-            ball.update();
 
-        scoreManager.draw(window);
         if (scoreManager.getLeftScore() == MAX_SCORE) {
             scoreManager.resetScore();
             observer->notify("left");
             return mainMenuScreen;
-        }
-        else if (scoreManager.getRightScore() == MAX_SCORE) {
+        } else if (scoreManager.getRightScore() == MAX_SCORE) {
             scoreManager.resetScore();
             observer->notify("right");
             return mainMenuScreen;
